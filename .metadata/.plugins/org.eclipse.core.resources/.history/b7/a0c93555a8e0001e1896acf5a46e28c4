@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class CamelCase {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter string name : ");
+		String name = sc.nextLine();
+		String result="";
+		String[] s = name.split(" ");
+		for(String word  : s) {
+			result += Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase() + " ";
+			
+		}
+		System.out.println(result);
+
+	}
+
+}

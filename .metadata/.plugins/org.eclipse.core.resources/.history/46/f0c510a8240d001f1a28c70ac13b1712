@@ -1,0 +1,51 @@
+package SidharthSelenium;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class UpdatedDropdown {
+
+    public static void main(String[] args) throws InterruptedException {
+        ChromeDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().deleteAllCookies();
+        driver.get("https://rahulshettyacademy.com/dropdownsPractise/#");
+
+        // Check if "Friends and Family" checkbox is selected
+        System.out.println(driver.findElement(By.cssSelector("input[id*='friendsandfamily']")).isSelected());
+
+        // Open passenger dropdown
+        driver.findElement(By.id("divpaxinfo")).click();
+        Thread.sleep(2000);
+
+        // Count the number of checkboxes (passenger types)
+        System.out.println(driver.findElements(By.cssSelector("input[type='checkbox']")).size());
+
+        // Select "Friends and Family" checkbox
+        driver.findElement(By.cssSelector("input[id*='friendsandfamily']")).click();
+        System.out.println(driver.findElement(By.cssSelector("input[id*='friendsandfamily']")).isSelected());
+
+        // Close passenger dropdown
+        driver.findElement(By.id("divpaxinfo")).click();
+        Thread.sleep(2000);
+
+        // Print passenger count
+        System.out.println(driver.findElement(By.id("divpaxinfo")).getText());
+        Thread.sleep(2000);
+
+        // Click the plus button to increase the number of adult passengers
+        for(int i = 1; i < 5; i++) {
+            driver.findElement(By.id("hrefIncAdt")).click();
+        }
+
+        // Close the passenger dropdown
+        driver.findElement(By.id("btnclosepaxoption")).click();
+        Thread.sleep(2000);
+
+        // Print updated passenger count
+        System.out.println(driver.findElement(By.id("divpaxinfo")).getText());
+
+        // Close the browser
+        //driver.quit();
+    }
+}

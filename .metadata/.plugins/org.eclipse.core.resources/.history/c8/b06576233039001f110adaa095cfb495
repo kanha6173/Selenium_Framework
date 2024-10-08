@@ -1,0 +1,72 @@
+package Udemy.SeleniumProject;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class StandAloneTest {
+
+	public static void main(String[] args) throws InterruptedException {
+		String productOne = "ZARA COAT 3";
+		String productTwo = "ADIDAS ORIGINAL";
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		String url = "https://rahulshettyacademy.com/client";
+		driver.get(url);
+		driver.findElement(By.id("userEmail")).sendKeys("kanhu@gmail.com");
+		driver.findElement(By.id("userPassword")).sendKeys("Kanha@6173");
+		driver.findElement(By.id("login")).click();
+
+		List<WebElement> products = driver.findElements(By.className("mb-3"));
+
+		// Add first product to cart
+		WebElement actualProductOne = products.stream()
+				.filter(product -> product.findElement(By.cssSelector("b")).getText().equals(productOne)).findFirst()
+				.orElse(null);
+
+		if (actualProductOne != null) {
+			// Wait for the overlay to disappear
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ngx-spinner-overlay")));
+			wait.until(ExpectedConditions.elementToBeClickable(
+					actualProductOne.findElement(By.cssSelector(".card-body button:last-of-type")))).click();
+		}
+
+		// Add second product to cart
+		WebElement actualProductTwo = products.stream()
+				.filter(product -> product.findElement(By.cssSelector("b")).getText().equals(productTwo)).findFirst()
+				.orElse(null);
+
+		if (actualProductTwo != null) {
+			// Wait for the overlay to disappear
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ngx-spinner-overlay")));
+			wait.until(ExpectedConditions.elementToBeClickable(
+					actualProductTwo.findElement(By.cssSelector(".card-body button:last-of-type")))).click();
+		}
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ngx-spinner-overlay")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[routerlink*='cart']"))).click();
+
+		List<WebElement> selectedProduct = driver.findElements(By.xpath("//div[@class='cartSection']/h3"));
+		Boolean match1 = selectedProduct.stream().anyMatch(p -> p.getText().equalsIgnoreCase(productOne));
+		Assert.assertTrue(match1);
+		Boolean match2 = selectedProduct.stream().anyMatch(p -> p.getText().equalsIgnoreCase(productTwo));
+		Assert.assertTrue(match2);
+
+		driver.findElement(By.xpath("//li[@class='totalRow']/button")).click();
+
+		// Uncomment these lines if you want to close the browser after a short delay
+		// Thread.sleep(3000);
+		// driver.close();
+	}
+}

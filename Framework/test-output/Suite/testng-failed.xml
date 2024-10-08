@@ -9,10 +9,22 @@
       <class name="KanhaFrameworkDesign.tests.ErrorValidationTest">
         <methods>
           <include name="tearDown"/>
-          <include name="loginErrorValidation"/>
           <include name="launchApplication"/>
+          <include name="productErrorValidation"/>
         </methods>
       </class> <!-- KanhaFrameworkDesign.tests.ErrorValidationTest -->
     </classes>
   </test> <!-- Error Validation Test (failed) -->
+  <test thread-count="5" parallel="tests" name="Submit Order Test (failed)">
+    <classes>
+      <class name="KanhaFrameworkDesign.tests.SampleTest">
+        <methods>
+          <include name="tearDown"/>
+          <include name="launchApplication"/>
+          <include name="orderHistory"/>
+          <include name="submitOrder" invocation-numbers="1"/>
+        </methods>
+      </class> <!-- KanhaFrameworkDesign.tests.SampleTest -->
+    </classes>
+  </test> <!-- Submit Order Test (failed) -->
 </suite> <!-- Failed suite [Suite] -->

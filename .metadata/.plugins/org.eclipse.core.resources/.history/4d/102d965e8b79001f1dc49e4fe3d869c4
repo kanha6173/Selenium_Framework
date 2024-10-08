@@ -1,0 +1,10 @@
+package Kanha.ExtentReport;
+
+public class ExtentReportDemo {
+
+	@Test
+	public void initalDemo() {
+
+	}
+
+}

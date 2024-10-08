@@ -1,0 +1,27 @@
+package SidharthSelenium;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class EndToEnd {
+
+	public static void main(String[] args) throws InterruptedException {
+		ChromeDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		driver.get("https://rahulshettyacademy.com/dropdownsPractise/#");
+		
+		//Select the from 
+		driver.findElement(By.id("ctl00_mainContent_ddl_originStation1_CTXT")).click();
+		driver.findElement(By.xpath("//a[@value='DEL']")).click();
+		Thread.sleep(2000);
+		
+		//Select To
+		driver.findElement(By.xpath("(//a[@value='CCU'])[2]")).click();
+		
+		//Select depart date
+		driver.findElement(By.xpath("//a[@class='ui-state-default ui-state-highlight']")).click();
+
+	}
+
+}

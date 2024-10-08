@@ -1,0 +1,17 @@
+package ONE;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ONE {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ChromeDriver d = new ChromeDriver();
+		d.get("https://www.flipkart.com/");
+		//d.findElement(By.name("q")).sendKeys("Mobiles");
+		d.findElement(By.xpath("//*[@id=\"container\"]/div/div[3]/div[1]/div[2]/div[2]/div/div/div/a/div[1]/div[1]/div/div/img")).click();
+
+	}
+
+}

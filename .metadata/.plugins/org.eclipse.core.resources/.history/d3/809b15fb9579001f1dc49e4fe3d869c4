@@ -1,0 +1,17 @@
+package KanhaFrameworkDesign.TestComponent;
+
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
+public class Listerens implements ITestListener {
+	@Override
+	public void onTestStart(ITestResult result) {
+
+	}
+
+	@Override
+	public void onTestSucess(ITestResult result) {
+
+	}
+
+}

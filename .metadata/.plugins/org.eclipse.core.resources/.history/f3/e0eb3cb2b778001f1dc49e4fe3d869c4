@@ -1,0 +1,88 @@
+package KanhaFrameworkDesign.tests;
+
+import java.io.IOException;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.Keys;
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import KanhaFramework.pageObjects.CartPage;
+import KanhaFramework.pageObjects.CheckOutPage;
+import KanhaFramework.pageObjects.ConfirmationPage;
+import KanhaFramework.pageObjects.LandingPage;
+import KanhaFramework.pageObjects.OrderPage;
+import KanhaFramework.pageObjects.ProductCatalogue;
+import KanhaFrameworkDesign.TestComponent.BaseTest;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class SampleTest extends BaseTest {
+	// String productName = "ZARA COAT 3";
+
+	@Test(dataProvider = "getData", groups = { "Purshase" })
+	public void submitOrder(HashMap<String, String> input) throws InterruptedException, IOException {
+
+		ProductCatalogue pc = lp.login(input.get("email"), input.get("password"));
+
+		List<WebElement> products = pc.getProductList();
+		pc.addProductToCart(input.get("productName"));
+		CartPage cp = pc.goToCartPage();
+
+		Boolean match = cp.verifyProductDisplay(input.get("productName"));
+		Assert.assertTrue(match);
+
+		CheckOutPage checkout = cp.goTocheckOut();
+		checkout.fillCreditCard();
+		checkout.fillMonth();
+		checkout.filldate();
+		checkout.fillCvv();
+		checkout.filldate();
+		checkout.selectCountry("India");
+		ConfirmationPage confirmationPage = checkout.submitOrder();
+
+		// Confirmation message
+		String confirmationMessage = confirmationPage.getConfirmatonMessage();
+		Assert.assertTrue(confirmationMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
+		Thread.sleep(5000);
+
+	}
+
+	@Test(dependsOnMethods = { "submitOrder" }, dataProvider = "getData")
+	public void orderHistory(String email, String password, String productName) {
+		ProductCatalogue pc = lp.login(email, password);
+		OrderPage op = pc.gotoOrdersPage();
+		Assert.assertTrue(op.verifyOrderDisplay(productName));
+	}
+
+	@DataProvider
+	public Object[][] getData() throws IOException {
+		
+		List<HashMap<String, String>> data = getJsonDataToMap(
+				System.getProperty("user.dir") + "\\src\\test\\java\\KanhaFrameworkDesign\\data\\PurchaseOrder.json");
+		return new Object[][] { { data.get(0) }, { data.get(1) } };
+		
+	}
+	
+	
+	/*
+	 * HashMap<String, String> map = new HashMap<String, String>(); map.put("email",
+	 * "kanhu@gmail.com"); map.put("password", "Kanha@6173"); map.put("productName",
+	 * "ZARA COAT 3");
+	 * 
+	 * HashMap<String, String> map1 = new HashMap<String, String>();
+	 * map1.put("email", "naa@gmail.com"); map1.put("password", "NAa@1234");
+	 * map1.put("productName", "NAa@1234");
+	 */
+
+}

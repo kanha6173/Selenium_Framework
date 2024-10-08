@@ -1,0 +1,17 @@
+package OOPS;
+
+public class AccessModifier {
+	public static class Student {
+		String name = "Kanha";
+		private int age = 24;
+		double pct = 75;
+	}
+
+	public static void main(String[] args) {
+		Student s1 = new Student();
+		s1.name="asc";
+		s1.age;
+
+	}
+
+}

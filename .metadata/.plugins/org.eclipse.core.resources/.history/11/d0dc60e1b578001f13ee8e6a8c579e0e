@@ -1,0 +1,5 @@
+package KanhaFrameworkDesign.data;
+
+public class DataReader {
+
+}

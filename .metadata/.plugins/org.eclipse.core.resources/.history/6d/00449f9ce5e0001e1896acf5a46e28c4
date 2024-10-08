@@ -1,0 +1,15 @@
+
+public class Practical2 {
+
+	public static void main(String[] args) {
+		String name = "kanhu charan ghadai";
+		String result="";
+		String[] s=name.split(" ");
+		for(String w : s) {
+			result+= Character.toUpperCase(w.charAt(0)) + w.substring(1).toLowerCase();
+		}
+		System.out.println(result.trim());
+
+	}
+
+}

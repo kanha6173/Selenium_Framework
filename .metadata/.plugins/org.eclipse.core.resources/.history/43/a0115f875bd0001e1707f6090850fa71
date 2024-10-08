@@ -1,0 +1,29 @@
+package caseStudy;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class AmazonProject {
+	ChromeDriver driver = new ChromeDriver();
+	public void link() {
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		driver.get("https://www.amazon.in/");
+	}
+	public int getLinkCount() {
+		// driver.findElements(By.tagName("a"));
+		List<WebElement> list = driver.findElements(By.xpath("//a"));
+		return list.size();
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

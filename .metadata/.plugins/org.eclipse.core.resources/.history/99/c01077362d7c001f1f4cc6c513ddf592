@@ -1,0 +1,28 @@
+package KanhaFrameworkDesign.stepDefinitions;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+
+import KanhaFramework.pageObjects.LandingPage;
+import KanhaFramework.pageObjects.ProductCatalogue;
+import KanhaFrameworkDesign.TestComponent.BaseTest;
+
+public class StepDefinationImp extends BaseTest {
+	public LandingPage landingPage;
+	public ProductCatalogue pc;
+
+	@Given("I land on Ecommerce page")
+	public void i_land_on_Ecommerce_page() {
+		landingPage = launchApplication();
+	}
+
+	@Given("^Logged in through username (.+) and password (.+)$")
+	public void login_through_username_and_password(String username, String password) {
+		pc = lp.login(username, password);
+	}
+
+	@When("^I add product (.+) to cart$")
+	public void i_add_product_to_cart(String productName) {
+		pc.addProductToCart(productName);
+	}
+
+}

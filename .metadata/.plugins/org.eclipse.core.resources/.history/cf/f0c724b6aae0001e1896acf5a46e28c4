@@ -1,0 +1,23 @@
+
+public class CamelCaseToDot {
+
+	public static void main(String[] args) {
+		String name = "Kanhu Charan Ghadai";
+		String ini = getInitials(name);
+		System.out.println(ini);
+
+	}
+
+	private static String getInitials(String name) {
+		String[] words = name.split(" ");
+		StringBuilder sb = new StringBuilder();
+		for(String word : words) {
+			if (!word.isEmpty()) {
+			sb.append(word.charAt(0)).append(".");
+		}
+		}
+		return sb.toString();
+	}
+
+}
+ 

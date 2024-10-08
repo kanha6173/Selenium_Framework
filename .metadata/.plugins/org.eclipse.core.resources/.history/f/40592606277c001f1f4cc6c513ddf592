@@ -1,0 +1,11 @@
+package KanhaFrameworkDesign.stepDefinitions;
+
+import KanhaFrameworkDesign.TestComponent.BaseTest;
+
+public class StepDefinationImp extends BaseTest {
+	@Given("I land on Ecommerce page")
+	public void i_land_on_Ecommerce_page() {
+		launchApplication();
+	}
+
+}

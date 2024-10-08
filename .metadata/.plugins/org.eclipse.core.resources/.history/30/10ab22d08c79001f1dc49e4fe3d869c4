@@ -1,0 +1,12 @@
+package Kanha.ExtentReport;
+
+import org.testng.annotations.Test;
+
+public class ExtentReportDemo {
+
+	@Test
+	public void initalDemo() {
+
+	}
+
+}

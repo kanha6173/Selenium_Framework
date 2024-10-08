@@ -1,0 +1,12 @@
+
+public class Reverse {
+
+	public static void main(String[] args) {
+		String name = "Kanhu Charan Ghadai";
+		//String 
+		StringBuffer bf = new StringBuffer(name);
+		System.out.println(bf.reverse());
+	
+		
+	}
+}

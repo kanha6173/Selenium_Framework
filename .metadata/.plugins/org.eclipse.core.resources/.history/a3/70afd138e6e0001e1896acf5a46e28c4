@@ -1,0 +1,11 @@
+
+public class Practical3 {
+
+	public static void main(String[] args) {
+		String name = "Kanhu Charan Ghadai" ;
+		StringBuilder sb = new StringBuilder();
+		System.out.println(sb.reverse());
+
+	}
+
+}

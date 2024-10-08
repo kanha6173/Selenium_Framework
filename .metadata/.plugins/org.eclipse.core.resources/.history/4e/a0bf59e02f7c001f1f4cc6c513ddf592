@@ -1,0 +1,85 @@
+package KanhaFrameworkDesign.stepDefinitions;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import java.io.IOException;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import KanhaFramework.pageObjects.CartPage;
+import KanhaFramework.pageObjects.CheckOutPage;
+import KanhaFramework.pageObjects.LandingPage;
+import KanhaFramework.pageObjects.ProductCatalogue;
+import KanhaFrameworkDesign.TestComponent.BaseTest;
+
+public class StepDefinationImp extends BaseTest {
+	public LandingPage landingPage;
+	public ProductCatalogue pc;
+
+	@Given("I land on Ecommerce page")
+	public void i_land_on_Ecommerce_page() throws IOException {
+		landingPage = launchApplication();
+	}
+
+	@Given("^Logged in through username (.+) and password (.+)$")
+	public void login_through_username_and_password(String username, String password) {
+		pc = landingPage.login(username, password);
+	}
+
+	@When("^I add product (.+) to cart$")
+	public void i_add_product_to_cart(String productName) {
+		pc.addProductToCart(productName);
+	}
+
+	@When("^Checkout (.+) and submit the order$")
+	public void checkout_and_submit_the_order(String productName) {
+		CartPage cp = pc.goToCartPage();
+
+		boolean match = cp.verifyProductDisplay(productName);
+		Assert.assertTrue(match, "Product not found in the cart");
+
+		CheckOutPage checkout = cp.goTocheckOut();
+
+		checkout.fillCreditCard();
+		checkout.fillMonth();
+		checkout.filldate();
+		checkout.fillCvv();
+		checkout.selectCountry("India");
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ngx-spinner-overlay")));
+
+		WebElement submitButton = wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("//a[@class='btnn action__submit ng-star-inserted']")));
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
+
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ngx-spinner-overlay")));
+
+		try {
+			submitButton.click();
+		} catch (ElementClickInterceptedException e) {
+
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("ngx-spinner-overlay")));
+			submitButton.click();
+		}
+
+	}
+
+	@Then("{string}  message is displayed on confirmation Page")
+	public void message_is_displayed_on_confirmation_Page(String string) {
+		String confirmationMessage = confirmationPage.getConfirmatonMessage();
+
+		Assert.assertTrue(confirmationMessage.equalsIgnoreCase(string));
+	}
+}

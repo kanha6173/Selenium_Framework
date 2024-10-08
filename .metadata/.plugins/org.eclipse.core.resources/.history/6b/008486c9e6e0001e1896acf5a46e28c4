@@ -1,0 +1,14 @@
+
+public class Practical4 {
+
+	public static void main(String[] args) {
+		String name = "Kanhu Charan Ghadai";
+		String result="";
+		String[] s = name.split(" ");
+		for(int i = s.length-1; i>0 ; i++) {
+			result =result+s[i]+" ";
+		}
+       System.out.println(result);
+	}
+
+}

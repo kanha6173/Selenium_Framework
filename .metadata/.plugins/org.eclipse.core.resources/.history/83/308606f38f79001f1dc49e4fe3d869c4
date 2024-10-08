@@ -1,0 +1,18 @@
+package Kanha.ExtentReport;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.testng.annotations.Test;
+
+public class ExtentReportDemo {
+
+	@Test
+	public void initialDemo() {
+		WebDriverManager.chromedriver().setup(); // This sets up ChromeDriver automatically
+		WebDriver driver = new ChromeDriver(); // Create an instance of ChromeDriver
+		driver.get("https://google.com"); // Open the Google homepage
+
+		driver.quit(); // Close the browser
+	}
+}

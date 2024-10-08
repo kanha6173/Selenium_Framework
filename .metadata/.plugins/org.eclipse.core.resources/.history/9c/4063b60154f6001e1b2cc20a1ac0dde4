@@ -1,0 +1,11 @@
+package JAVA;
+
+public class BasicString {
+
+	public static void main(String[] args) {
+		String str = "Kanha" ;
+		System.out.println(str);
+
+	}
+
+}

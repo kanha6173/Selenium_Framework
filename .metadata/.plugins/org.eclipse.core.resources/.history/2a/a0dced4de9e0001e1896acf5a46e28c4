@@ -1,0 +1,23 @@
+
+public class Practical5 {
+
+	public static void main(String[] args) {
+		String name = "Kanhu Charan Ghadai";
+		String ini = getInitials(name);
+		
+
+	}
+
+	private static String getInitials(String name) {
+		String[] s = name.split(" ");
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i<s.length; i++) {
+			sb.append(s[i].charAt(0));
+			if(i < s.length-1) {
+				sb.append(".");
+			}
+		}
+		return sb.toString();
+	}
+
+}

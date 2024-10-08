@@ -1,0 +1,18 @@
+package KanhaFramework.resources;
+
+import KanhaFrameworkDesign.tests.ExtentReports;
+import KanhaFrameworkDesign.tests.ExtentSparkReporter;
+
+public class ExtentReporterNG {
+	public void getReportOnject() {
+		String path = System.getProperty("user.dir") + "\\reports\\index.html";
+		ExtentSparkReporter reporter = new ExtentSparkReporter(path);
+		reporter.config().setReportName("Web Automation Report");
+		reporter.config().setDocumentTitle("Test Results");
+
+		extent = new ExtentReports();
+		extent.attachReporter(reporter);
+		extent.setSystemInfo("TESTER", "KANHU CHARAN GHADAI");
+	}
+
+}

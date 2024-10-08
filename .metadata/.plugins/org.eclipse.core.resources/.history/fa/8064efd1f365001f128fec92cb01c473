@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite parallel="tests" name="Suite">
+	<listeners>
+		<listener class-name="Udemy.TestComponent.Listerens" />
+	</listeners>
+	<test thread-count="5" name="Submit Order Test">
+		<classes>
+			<class name="Udemy.SeleniumProject.StandAloneTestCopy" />
+		</classes>
+	</test>
+
+	<test thread-count="5" name="Error Validation Test">
+		<classes>
+			<class name="Udemy.SeleniumProject.ErrorValidation" />
+		</classes>
+	</test>
+</suite> <!--
+Suite -->

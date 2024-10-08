@@ -1,0 +1,31 @@
+package ONE;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class MultipleBrowserTesting {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ChromeDriver d = new ChromeDriver();
+		
+		d.manage().window().maximize();
+		d.get("https://qatechhub.com/");
+		 String u=d.getCurrentUrl();
+		 String pageTitle = d.getTitle();
+			System.out.println("Page Title is : "  + pageTitle);
+		if(u.equals("QA Automation Tools Trainings and Tutorials | QA Tech Hub"))
+		{
+			System.out.println("Title of the url is matched");
+			
+		}
+		else
+		{
+			System.out.println("Title of the url is not matched");
+		}
+		d.close();
+		
+		
+		 
+	}
+
+}

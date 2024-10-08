@@ -1,0 +1,30 @@
+package SidharthSelenium;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class FluentWait {
+
+	public static void main(String[] args) {
+		ChromeDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
+		start(driver);
+
+	}
+	public static void start(WebDriver driver) {
+		driver.findElement(By.xpath("//div[@id='start']")).click();
+		//driver.findElement(By.cssSelector("[id='start']")).click();
+		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(5000));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id=''finish]")));
+		System.out.println(driver.findElement(By.cssSelector("[id='finish']")).getText());
+	}
+
+}

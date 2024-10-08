@@ -1,0 +1,26 @@
+package SidharthSelenium;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ScrollingAssignment {
+
+	public static void main(String[] args) {
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("http://qaclickacademy.com/practice.php");
+		JavascriptExecutor js =( JavascriptExecutor)driver;
+		js.executeScript("window.scrollBy(0,300)");
+		WebElement table =driver.findElement(By.id("product"));
+		System.out.println(table.findElements(By.tagName("tr")).size());
+		System.out.println(table.findElements(By.tagName("tr")).get(0).findElements(By.tagName("th")).size());
+
+
+		
+
+	}
+
+}

@@ -1,0 +1,64 @@
+package Cavisson;
+
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class Noc2 {
+	ChromeDriver driver = new ChromeDriver();
+	public void url() {
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		//driver.get("https://10.10.50.61:5000/UnifiedDashboard/#/login");
+		driver.get("https://10.10.50.61:5000/UnifiedDashboard/#/login");
+	}
+	public void login() throws InterruptedException {
+		driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();
+		driver.findElement(By.id("proceed-link")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.className("w-100-p")).sendKeys("guest");
+		driver.findElement(By.cssSelector("input[placeholder='Password']")).sendKeys("guest");
+		driver.findElement(By.className("ui-button-text")).click();
+        //driver.findElement(By.xpath("//button[@ptooltip='Time Filter']\"")).click();
+
+		Thread.sleep(5000);
+	}
+	public void endToEnd() throws IOException, InterruptedException {
+		//driver.findElement(By.className("categories-item-drag")).click();
+		driver.findElement(By.linkText("END TO END")).click();
+		Thread.sleep(3000);
+		
+		//ScreenShot
+		//File f = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		//Files.copy(f,new File("C:\\Users\\kanhucharan.ghadai\\Pictures\\Camera Roll\\seleniumScreenShot1.png"));
+		
+		Thread.sleep(3000);
+		 /* Double click
+        WebElement circleElement = driver.findElement(By.cssSelector("circle#criticalInner"));
+
+        // Create an instance of Actions class
+        Actions actions = new Actions(driver);
+
+        // Double-click on the circle element
+        actions.doubleClick(circleElement).perform(); */
+		
+		//double click code in one line
+		//new Actions(driver).doubleClick(driver.findElement(By.cssSelector("circle#criticalInner"))).perform();
+		
+		//Right click
+		new Actions(driver).contextClick(driver.findElement(By.cssSelector("circle#criticalInner"))).perform();
+		driver.findElement(By.linkText("DrillDown")).click();
+		driver.findElement(By.linkText("Flowpaths By Response Time")).click();
+
+	}
+
+	public static void main(String[] args) throws InterruptedException, IOException {
+		Noc2 nc = new Noc2();
+		nc.url();
+		nc.login();
+		nc.endToEnd();	
+	}
+
+}

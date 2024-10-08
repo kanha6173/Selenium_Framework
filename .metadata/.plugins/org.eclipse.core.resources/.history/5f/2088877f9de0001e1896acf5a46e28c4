@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Greater {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter First name : ");
+		String firstname = sc.nextLine();
+		String lastname =sc.nextLine();
+		int result =firstname.compareTo(lastname);
+		if(result > 0) {
+			System.out.println("Greater number is " + firstname);
+		} else if (result <0) {
+			System.out.println("Greater number is " + lastname);
+		}else {
+			System.out.println("Both numbers are equal");
+		}
+
+	}
+
+}

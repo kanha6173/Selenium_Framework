@@ -1,0 +1,19 @@
+package SidharthSelenium;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ScreenShot {
+
+	public static void main(String[] args) {
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		String url="http://10.10.20.24/SavvyHRMS/EmployeeDashboard.aspx";
+		driver.get(url);
+		driver.findElement(By.id("txtUserName")).sendKeys("CS10952");
+		driver.findElement(By.id("txtPassword")).sendKeys("Kanha@6173");
+		driver.findElement(By.id("btnlogin")).click();
+	}
+
+}

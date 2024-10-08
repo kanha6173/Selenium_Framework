@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class Greater {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter First name : ");
+		String firstname = sc.next();
+		System.out.println("Enter Second name : ");
+		String lastname =sc.next();
+		int result =Integer.compare(firstname.length(), lastname.length());
+		if(result > 0) {
+			System.out.println("Greater name is " + firstname);
+		} else if (result <0) {
+			System.out.println("Greater name is " + lastname);
+		}else {
+			System.out.println("Both name are equal");
+		}
+
+	}
+
+}
