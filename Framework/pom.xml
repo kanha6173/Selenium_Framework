@@ -43,10 +43,16 @@
 
 		<!-- ExtentReports -->
 		<dependency>
+			<groupId>Kanha</groupId>
+			<artifactId>ExtentReport</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
 			<version>5.1.2</version>
 		</dependency>
+
 
 		<!-- TestNG -->
 		<dependency>
