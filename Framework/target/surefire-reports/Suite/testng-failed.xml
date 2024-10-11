@@ -11,7 +11,7 @@
           <include name="tearDown"/>
           <include name="launchApplication"/>
           <include name="orderHistory"/>
-          <include name="submitOrder" invocation-numbers="0 1"/>
+          <include name="submitOrder" invocation-numbers="1"/>
         </methods>
       </class> <!-- KanhaFrameworkDesign.tests.SampleTest -->
     </classes>
